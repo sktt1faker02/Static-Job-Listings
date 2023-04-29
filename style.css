@@ -1,0 +1,322 @@
+/* CSS Reset */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+body {
+  min-height: 100vh;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+textarea,
+button,
+select {
+  font: inherit;
+}
+
+/*End of CSS Reset */
+
+:root {
+  /* ## Colors */
+
+  /* ### Primary */
+
+  --desaturated-dark-cyan: hsl(180, 29%, 50%);
+
+  /* ### Neutral */
+
+  --light-grayish-cyan-bg: hsl(180, 52%, 96%);
+  --light-grayish-cyan: hsl(180, 31%, 95%); /*(Filter Tablets) */
+  --dark-grayish-cyan: hsl(180, 8%, 52%);
+  --very-dark-grayish-cyan: hsl(180, 14%, 20%);
+
+  /* ## Typography */
+  --fs: 15px;
+  --ff: "League Spartan", sans-serif;
+  --fw-500: 500;
+  --fw-700: 700;
+}
+
+html {
+  font-family: var(--ff);
+  font-size: var(--fs);
+}
+
+body {
+  background-color: var(--light-grayish-cyan-bg);
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* Filter */
+.filter {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 1.5rem;
+  margin-top: -2rem;
+  /* margin-bottom: 1.5rem; */
+  padding: 1.3rem 1rem;
+  background-color: white;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  border-radius: 5px;
+  gap: 2rem;
+}
+
+.filter.active {
+  display: flex;
+}
+
+.filter-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.filter-tags {
+  display: flex;
+  /* align-items: center; */
+
+  color: var(--desaturated-dark-cyan);
+  background-color: var(--light-grayish-cyan);
+
+  font-weight: var(--fw-700);
+}
+
+.filter-tags span {
+  padding: 0.5rem 0.4rem;
+}
+
+.filter-tags button {
+  border: none;
+  background-color: var(--desaturated-dark-cyan);
+  padding: 0 0.5rem;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  cursor: pointer;
+}
+
+.filter-tags button:hover {
+  background-color: black;
+}
+
+.clear {
+  border: none;
+  background-color: transparent;
+  color: var(--dark-grayish-cyan);
+  font-weight: var(--fw-700);
+  cursor: pointer;
+}
+
+.clear:hover {
+  color: var(--desaturated-dark-cyan);
+  text-decoration: underline;
+}
+
+header {
+  background: var(--desaturated-dark-cyan) url(./images/bg-header-mobile.svg) no-repeat bottom;
+  background-size: cover;
+  min-height: 170px;
+}
+
+.job-list {
+  margin-top: 4.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  padding: 0 1.5rem;
+}
+
+article {
+  /* padding: 1.5rem 1.5rem; */
+}
+
+.job-wrapper {
+  background-color: white;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
+.featured {
+  border-left: 5px solid var(--desaturated-dark-cyan);
+}
+
+.job-container-left {
+  position: relative;
+}
+
+.job-container {
+  margin-top: 2.7rem;
+}
+
+.company-logo {
+  position: absolute;
+  top: -2rem;
+  width: 4rem;
+}
+
+.company-name {
+  font-weight: var(--fw-700);
+  color: var(--desaturated-dark-cyan);
+}
+
+.job-header {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.job-category {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.featured-tags {
+  background-color: var(--desaturated-dark-cyan);
+  color: white;
+  text-transform: uppercase;
+  padding: 0.3rem 0.5rem;
+  border-radius: 15px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.featured-tags:last-of-type {
+  background-color: black;
+}
+
+.job-title,
+.job-details {
+  margin-top: 1rem;
+}
+
+.job-title {
+  font-weight: var(--fw-700);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.job-title:hover {
+  color: var(--desaturated-dark-cyan);
+}
+
+.job-details {
+  display: flex;
+  gap: 1rem;
+  color: var(--dark-grayish-cyan);
+  font-weight: var(--fw-500);
+}
+
+.job-details li {
+  margin-right: 0.5rem;
+}
+
+.posted-date {
+  list-style: none;
+}
+
+.line-separator {
+  height: 1px;
+  width: 100%;
+  background-color: var(--dark-grayish-cyan);
+  opacity: 0.5;
+}
+
+.job-filter-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.job-skills {
+  padding: 0.5rem 0.4rem;
+  color: var(--desaturated-dark-cyan);
+  background-color: var(--light-grayish-cyan);
+  border: none;
+  font-weight: var(--fw-700);
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.job-skills:hover {
+  background-color: var(--desaturated-dark-cyan);
+  color: white;
+}
+
+/* Desktop */
+
+@media (min-width: 768px) {
+  header {
+    background: var(--desaturated-dark-cyan) url(./images/bg-header-desktop.svg) no-repeat;
+    background-position: 50%;
+    background-size: cover;
+  }
+
+  .job-list {
+    gap: 1.5rem;
+  }
+
+  .job-wrapper {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0;
+    align-items: center;
+    padding: 1.5rem;
+  }
+
+  .job-container-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .company-logo {
+    all: unset;
+    width: 5rem;
+  }
+
+  .job-container {
+    margin: 0;
+  }
+
+  .line-separator {
+    display: none;
+  }
+
+  .job-filter-skills {
+    margin-bottom: 0;
+    flex-wrap: nowrap;
+  }
+
+  .job-title,
+  .job-details {
+    margin-top: 0.5rem;
+  }
+}
