@@ -87,7 +87,7 @@ const displayJobs = function (jobs) {
 };
 
 /* Filter */
-let tagArr = [];
+
 const filterTag = function () {
   const tags = document.querySelectorAll("[data-filter]");
   tags.forEach((tag) => {
@@ -105,43 +105,36 @@ const filterDisplay = function (tagName) {
 
   const filterTag = document.createElement("div");
   filterTag.classList.add("filter-tags");
+
   filterTag.innerHTML = `
       <span>${tagName}</span>
       <button><img src="./images/icon-remove.svg" alt="icon-remove" /></button>
   `;
+
   document.querySelector(".filter-wrapper").appendChild(filterTag);
 
   const tagNameEl = document.querySelectorAll(".filter-tags span");
+
   const uniqueTags = [];
+
   tagNameEl.forEach((tag) => {
     if (!uniqueTags.includes(tag.innerText)) {
       uniqueTags.push(tag.innerText);
+      updatePageFilter(uniqueTags);
     } else {
       tag.parentElement.remove();
     }
   });
-  updatePageFilter(uniqueTags);
+
+  console.log("uniqueTags", uniqueTags);
 };
 
 const removeFilter = function () {
   const removeTagEl = document.querySelectorAll(".filter-tags button");
-  const filterWrapper = document.querySelector(".filter-wrapper");
   removeTagEl.forEach((tag) => {
     tag.addEventListener("click", () => {
-      //   console.log(tag.parentElement);
       tag.parentElement.remove();
-
-      const tagNameEl = document.querySelectorAll(".filter-tags span");
-      const uniqueTags = [];
-      tagNameEl.forEach((tag) => {
-        if (!uniqueTags.includes(tag.innerText)) {
-          uniqueTags.push(tag.innerText);
-        } else {
-          tag.parentElement.remove();
-        }
-      });
-      updatePageFilter(uniqueTags);
-
+      const filterWrapper = document.querySelector(".filter-wrapper");
       if (!filterWrapper.hasChildNodes()) {
         filterWrapper.parentElement.classList.remove("active");
       }
@@ -153,33 +146,50 @@ const removeFilter = function () {
     const filterWrapper = document.querySelector(".filter-wrapper");
     filterWrapper.replaceChildren();
     filterWrapperEl.classList.remove("active");
-    // document.querySelector(".job-list").style.display = "none";
-    updatePageFilter([]);
   });
 };
 
-const updatePageFilter = function (tags) {
-  //   console.log(tags);
+const updatePageFilter = function (arr) {
   const jobElements = document.querySelectorAll(".job");
-  jobElements.forEach((job) => {
-    const buttonFilter = job.querySelectorAll("[data-filter]");
+  let btnTags = [];
+  let refArr = [];
 
-    // const filters = Array.from(buttonFilter).map((button) => button.dataset.filter);
-    const filters = [...buttonFilter].map((button) => button.dataset.filter);
-
-    const shouldDisplay = tags.every((e) => {
-      return filters.includes(e);
+  jobElements.forEach((job, i) => {
+    let buttonFilter = job.querySelectorAll("[data-filter]");
+    // console.log(buttonFilter);
+    // This remove unfiltered tag
+    Array.from(buttonFilter).some((button, i) => {
+      const filters = button.dataset.filter.split(",");
+      //   console.log(filters);
+      if (!arr.includes(filters[0])) {
+        job.style.display = "none";
+      }
     });
 
-    if (shouldDisplay) {
-      job.style.display = "";
-    } else {
-      job.style.display = "none";
-    }
+    btnTags.push(Array.from([...buttonFilter]));
 
-    // const shouldDisplay = tags.every((tag) => {
-    //   return filters.includes(tag);
-    // });
-    // job.style.display = shouldDisplay ? "" : "none";
+    btnTags.push(Array.from([...buttonFilter]).map((d) => d.dataset.filter));
+
+    refArr.push({
+      [`${Array.from([...buttonFilter])
+        .map((d) => d.dataset.filter)
+        .join(",")}`]: job,
+    });
+
+    console.log(refArr);
+  });
+
+  arr.map((word) => {
+    btnTags = btnTags.filter((btn) => btn.includes(word));
+  });
+
+  const tags = btnTags.map((d) => d.join(","));
+
+  tags.forEach((tags) => {
+    refArr.forEach((ref) => {
+      if (ref.hasOwnProperty(tags)) {
+        ref[tags].style.display = "block";
+      }
+    });
   });
 };
